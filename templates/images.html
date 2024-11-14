@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cyclone Prediction Visualization</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background */
+            color: #000; /* Black text */
+            font-family: 'Arial', sans-serif;
+        }
+        h1, h2, h3 {
+            color: #000;
+        }
+        .navbar {
+            background-color: #1e90ff; /* Dodger blue */
+        }
+        .navbar-brand, .nav-link {
+            color: #fff !important;
+        }
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .image-card {
+            margin: 10px;
+            width: 300px;
+        }
+        .image-card img {
+            width: 100%;
+            height: auto;
+        }
+        .card-title {
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        .footer {
+            background-color: #1e90ff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="#">Cyclone Prediction</a>
+</nav>
+
+<div class="container mt-4">
+    <h1 class="text-center">Cyclone Prediction Visualization</h1>
+    <h2 class="text-center">Date: {{ date }}, Hour: {{ hour }}:00</h2>
+    <p class="text-center"><strong>Cyclone prediction in the next 2 days.</strong></p>
+    <div class="image-container">
+        {% for variable, url in image_urls.items() %}
+            <div class="card image-card">
+                {% if url %}
+                    <img src="{{ url }}" class="card-img-top" alt="{{ variable }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/300x300?text=No+Image" class="card-img-top" alt="No Image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ variable }}</h5>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-4">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Selection</a>
+    </div>
+</div>
+
+<div class="footer">
+    &copy;  Cyclone Prediction Project | Dataset used : GEOS by Nasa and GMO
+</div>
+
+<!-- Include Bootstrap JS and dependencies (optional, for better functionality) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
